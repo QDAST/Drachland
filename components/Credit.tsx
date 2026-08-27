@@ -39,11 +39,11 @@ export default function Credit({
           {summ}
         </h1>
       </div>
-      <div className="w-0.5 h-3/4 bg-gray-400 rounded-full"></div>
+      <div className="w-0.5 h-15 bg-gray-400 rounded-full"></div>
       <div>
         <h1>{circles}</h1>
       </div>
-      <div className="w-0.5 h-3/4 bg-gray-400 rounded-full"></div>
+      <div className="w-0.5 h-15 bg-gray-400 rounded-full"></div>
       <div className="flex flex-col gap-3">
         <Button
           className="flex bg-amber-300 w-[15vw] h-10 justify-center items-center text-3xl rounded-full"
@@ -58,13 +58,13 @@ export default function Credit({
           +
         </Button>
       </div>
-      <div className="w-0.5 h-3/4 bg-gray-400 rounded-full"></div>
+      <div className="w-0.5 h-15 bg-gray-400 rounded-full"></div>
       <div>
         <h1>{debt}</h1>
       </div>
-      <div className="w-0.5 h-3/4 bg-gray-400 rounded-full"></div>
+      <div className="w-0.5 h-15 bg-gray-400 rounded-full"></div>
       <Button
-        className="flex bg-amber-300 w-[15vw] h-full justify-center items-center text-3xl rounded-2xl"
+        className="flex bg-amber-300 w-[15vw] h-20 justify-center items-center text-3xl rounded-2xl"
         onClick={onDelete}
       >
         <div className="w-8/10 h-9/10 bg-green-700 rounded-xl"></div>
