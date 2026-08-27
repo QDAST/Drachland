@@ -4,9 +4,14 @@ import Button from "./Button";
 type CreditType = {
   name?: ReactNode;
   summ?: number;
+  onDelete?: () => void;
 };
 
-export default function Credit({ name = "ANONIM", summ = 10 }: CreditType) {
+export default function Credit({
+  name = "ANONIM",
+  summ = 10,
+  onDelete,
+}: CreditType) {
   const [circles, setCircles] = useState(1);
 
   if (name === "") name = "ANONIM";
@@ -15,7 +20,7 @@ export default function Credit({ name = "ANONIM", summ = 10 }: CreditType) {
   const debt =
     summ <= 5
       ? Math.ceil(summ * (circles + 1))
-      : summ <= 30
+      : summ <= 100
         ? Math.ceil(summ * (0.5 * circles + 1))
         : 0;
 
@@ -58,6 +63,12 @@ export default function Credit({ name = "ANONIM", summ = 10 }: CreditType) {
         <h1>{debt}</h1>
       </div>
       <div className="w-0.5 h-3/4 bg-gray-400 rounded-full"></div>
+      <Button
+        className="flex bg-amber-300 w-[15vw] h-full justify-center items-center text-3xl rounded-2xl"
+        onClick={onDelete}
+      >
+        <div className="w-8/10 h-9/10 bg-green-700 rounded-xl"></div>
+      </Button>
     </div>
   );
 }

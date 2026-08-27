@@ -8,7 +8,7 @@ import CounterMenu from "@/components/CounterMenu";
 
 export default function Home() {
   return (
-    <div className="flex flex-col bg-gray-300 h-screen w-full p-2 gap-3">
+    <div className="flex flex-col bg-gray-300 min-h-screen h-full w-full p-2 gap-3">
       <div className="h-10"></div>
       <CounterMenu></CounterMenu>
       <CreditMenu></CreditMenu>
