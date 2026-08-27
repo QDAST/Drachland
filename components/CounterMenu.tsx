@@ -14,6 +14,7 @@ export default function CounterMenu() {
 
   return (
     <div className="flex flex-col bg-gray-400 w-full p-1 gap-3 rounded-xl">
+      <h1 className="flex text-black font-bold justify-center">Balance Menu</h1>
       <div className="flex gap-3 items-center bg-gray-300 p-1 rounded-2xl border border-black">
         <h1 className="flex w-3/10 h-full bg-amber-300 border border-black text-black font-bold justify-center items-center rounded-xl">
           STEP

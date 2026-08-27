@@ -16,7 +16,7 @@ export default function CreateCounterButton({
         className="rounded-xl w-full p-2 text-center justify-center text-black font-bold border border-black"
         onClick={onClick}
       >
-        New Counter
+        New Balance
       </Button>
     </div>
   );

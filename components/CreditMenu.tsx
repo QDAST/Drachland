@@ -13,7 +13,7 @@ export default function CreditMenu() {
   };
   return (
     <div className="flex flex-col gap-3 bg-gray-400 p-1 rounded-xl">
-      <h1 className="flex text-black font-bold justify-center">Balance Menu</h1>
+      <h1 className="flex text-black font-bold justify-center">Credit Menu</h1>
       <div className="flex flex-col gap-3">
         <input
           type="text"
