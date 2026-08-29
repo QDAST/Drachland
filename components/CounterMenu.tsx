@@ -43,7 +43,6 @@ export default function CounterMenu() {
   useEffect(() => {
     loadPlayers();
 
-    // Подписываемся на изменения
     const channel = supabase
       .channel("players-realtime")
       .on(
@@ -53,9 +52,8 @@ export default function CounterMenu() {
           schema: "public",
           table: "Player",
         },
-        () => {
-          console.log("Изменение в Player!");
-
+        (payload) => {
+          console.log("Realtime Player:", payload);
           loadPlayers();
         },
       )
@@ -66,11 +64,14 @@ export default function CounterMenu() {
           schema: "public",
           table: "Balance",
         },
-        () => {
+        (payload) => {
+          console.log("Realtime Balance:", payload);
           loadPlayers();
         },
       )
-      .subscribe();
+      .subscribe((status) => {
+        console.log("Realtime status:", status);
+      });
 
     return () => {
       supabase.removeChannel(channel);
