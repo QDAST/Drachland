@@ -9,6 +9,7 @@ type CounterProps = {
   step?: number;
   balance?: number;
   onChange?: (newBalance: number) => void;
+  onDelete?: () => void;
 };
 
 export default function Counter({
@@ -17,12 +18,20 @@ export default function Counter({
   step = 1,
   balance = 0,
   onChange,
+  onDelete,
 }: CounterProps) {
   return (
     <div className="flex flex-col gap-3 items-center bg-gray-500 p-5 rounded-xl border border-black">
-      <span className="flex h-10 w-full bg-gray-100 text-10px text-black rounded-full justify-center items-center font-bold">
-        {name.trim() !== "" ? name.toUpperCase() : "ANONIM"}
-      </span>
+      <div className="flex w-full gap-3">
+        <span className="flex h-10 w-full bg-gray-100 text-10px text-black rounded-full justify-center items-center font-bold">
+          {name.trim() !== "" ? name.toUpperCase() : "ANONIM"}
+        </span>
+        <Button
+          onClick={onDelete}
+          className="flex w-12 rounded-full bg-red-600"
+        ></Button>
+      </div>
+
       <div className="flex h-0.5 w-3/4 bg-gray-400 rounded-full"></div>
       <div className="flex w-10/10 content-center justify-between">
         <Button

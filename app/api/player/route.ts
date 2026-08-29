@@ -29,3 +29,26 @@ export async function POST(request: Request) {
 
   return Response.json(player);
 }
+
+export async function DELETE(request: Request) {
+  const body = await request.json();
+  const playerId = body.playerId;
+
+  if (!playerId) {
+    return Response.json({ error: "playerId is required" }, { status: 400 });
+  }
+
+  await prisma.balance.deleteMany({
+    where: {
+      playerId: playerId,
+    },
+  });
+
+  await prisma.player.delete({
+    where: {
+      id: playerId,
+    },
+  });
+
+  return Response.json({ success: true });
+}

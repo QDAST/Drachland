@@ -14,10 +14,8 @@ type Player = {
 
 export default function CounterMenu() {
   const [step, setStep] = useState(1);
-  //const [counters, setCounters] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [players, setPlayers] = useState<Player[]>([]);
-
   async function addNewCounter(name: string) {
     const response = await fetch("/api/player", {
       method: "POST",
@@ -33,12 +31,21 @@ export default function CounterMenu() {
     setPlayers((players) => [...players, data]);
   }
 
-  async function loadPlayers() {
-    const response = await fetch("/api/player");
+  const loadPlayers = async () => {
+    try {
+      const response = await fetch("/api/player");
 
-    const data = await response.json();
-    setPlayers(data);
-  }
+      if (!response.ok) {
+        console.error("Failed to load players:", response.status);
+        return;
+      }
+
+      const data = await response.json();
+      setPlayers(data);
+    } catch (error) {
+      console.error("loadPlayers error:", error);
+    }
+  };
 
   useEffect(() => {
     loadPlayers();
@@ -105,6 +112,35 @@ export default function CounterMenu() {
     });
   };
 
+  const deletePlayer = async (playerId: string) => {
+    const player = players.find((player) => player.id === playerId);
+
+    if (!player) return;
+
+    const confirm = window.confirm(
+      `Delete player "${player.name}" and his balance?`,
+    );
+
+    if (!confirm) return;
+
+    const response = await fetch("/api/player", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        playerId,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Player delete error");
+      return;
+    }
+
+    setPlayers((players) => players.filter((player) => player.id !== playerId));
+  };
+
   return (
     <div className="flex flex-col bg-gray-400 w-full p-1 gap-3 rounded-xl">
       <h1 className="flex text-black font-bold justify-center">Balance Menu</h1>
@@ -150,6 +186,7 @@ export default function CounterMenu() {
               balance={player.balance.amount}
               step={step}
               onChange={(newBalance) => updateBalance(player.id, newBalance)}
+              onDelete={() => deletePlayer(player.id)}
             />
           ))}
         </div>
