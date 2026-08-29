@@ -1,6 +1,7 @@
 import Counter from "@/components/Counter";
 import CreateCounterButton from "@/components/CreateCounterButton";
 import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 type Player = {
   id: string;
@@ -13,19 +14,67 @@ type Player = {
 
 export default function CounterMenu() {
   const [step, setStep] = useState(1);
-  const [counters, setCounters] = useState<string[]>([]);
+  //const [counters, setCounters] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [players, setPlayers] = useState<Player[]>([]);
 
-  const addNewCounter = () => {
-    setCounters([...counters, name]);
-    setName("");
-  };
+  async function addNewCounter(name: string) {
+    const response = await fetch("/api/player", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+      }),
+    });
+
+    const data = await response.json();
+    setPlayers((players) => [...players, data]);
+  }
+
+  async function loadPlayers() {
+    const response = await fetch("/api/player");
+
+    const data = await response.json();
+    setPlayers(data);
+  }
 
   useEffect(() => {
-    fetch("/api/player")
-      .then((res) => res.json())
-      .then((data) => setPlayers(data));
+    loadPlayers();
+
+    // Подписываемся на изменения
+    const channel = supabase
+      .channel("players-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "Player",
+        },
+        () => {
+          console.log("Изменение в Player!");
+
+          loadPlayers();
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "Balance",
+        },
+        () => {
+          loadPlayers();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const updateBalance = async (playerId: string, newBalance: number) => {
@@ -77,7 +126,11 @@ export default function CounterMenu() {
         />
       </div>
 
-      <CreateCounterButton onClick={addNewCounter}></CreateCounterButton>
+      <CreateCounterButton
+        onClick={() => {
+          addNewCounter(name);
+        }}
+      ></CreateCounterButton>
 
       <input
         type="text"

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "./Button";
 
 type CreateCounterButtonProps = {
-  onClick: () => void;
+  onClick: (name: string) => void;
 };
 
 export default function CreateCounterButton({
