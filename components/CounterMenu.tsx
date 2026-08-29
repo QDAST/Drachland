@@ -1,15 +1,58 @@
 import Counter from "@/components/Counter";
 import CreateCounterButton from "@/components/CreateCounterButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type Player = {
+  id: string;
+  name: string;
+  balance: {
+    id: string;
+    amount: number;
+  };
+};
 
 export default function CounterMenu() {
   const [step, setStep] = useState(1);
   const [counters, setCounters] = useState<string[]>([]);
   const [name, setName] = useState("");
+  const [players, setPlayers] = useState<Player[]>([]);
 
   const addNewCounter = () => {
     setCounters([...counters, name]);
     setName("");
+  };
+
+  useEffect(() => {
+    fetch("/api/player")
+      .then((res) => res.json())
+      .then((data) => setPlayers(data));
+  }, []);
+
+  const updateBalance = async (playerId: string, newBalance: number) => {
+    setPlayers((players) =>
+      players.map((player) =>
+        player.id === playerId
+          ? {
+              ...player,
+              balance: {
+                ...player.balance,
+                amount: newBalance,
+              },
+            }
+          : player,
+      ),
+    );
+
+    await fetch("/api/balance", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        playerId: playerId,
+        amount: newBalance,
+      }),
+    });
   };
 
   return (
@@ -46,8 +89,14 @@ export default function CounterMenu() {
 
       <div className="flex content-center">
         <div className="flex flex-col gap-3 w-full">
-          {counters.map((counterName, index) => (
-            <Counter key={index} name={counterName} step={step} />
+          {players.map((player) => (
+            <Counter
+              key={player.id}
+              name={player.name}
+              balance={player.balance.amount}
+              step={step}
+              onChange={(newBalance) => updateBalance(player.id, newBalance)}
+            />
           ))}
         </div>
       </div>
