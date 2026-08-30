@@ -1,46 +1,29 @@
-import Counter from "@/components/Counter";
-import CreateCounterButton from "@/components/CreateCounterButton";
+import Counter from "@/components/Counter/Counter";
+import CreateCounterButton from "@/components/Counter/CreateCounterButton";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-
-type Player = {
-  id: string;
-  name: string;
-  balance: {
-    id: string;
-    amount: number;
-  };
-};
+import { Player } from "./types";
+import {
+  getPlayers,
+  subscribeToPlayers,
+  deletePlayer as apiDeletePlayer,
+  createPlayer as apiCreatePlayer,
+  updateBalance as apiUpdateBalance,
+} from "./api";
 
 export default function CounterMenu() {
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [players, setPlayers] = useState<Player[]>([]);
-  async function addNewCounter(name: string) {
-    const response = await fetch("/api/player", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-      }),
-    });
 
-    const data = await response.json();
+  const createPlayer = async (name: string) => {
+    const data = await apiCreatePlayer();
     setPlayers((players) => [...players, data]);
-  }
+  };
 
   const loadPlayers = async () => {
     try {
-      const response = await fetch("/api/player");
-
-      if (!response.ok) {
-        console.error("Failed to load players:", response.status);
-        return;
-      }
-
-      const data = await response.json();
+      const data = await getPlayers();
       setPlayers(data);
     } catch (error) {
       console.error("loadPlayers error:", error);
@@ -50,35 +33,9 @@ export default function CounterMenu() {
   useEffect(() => {
     loadPlayers();
 
-    const channel = supabase
-      .channel("players-realtime")
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "Player",
-        },
-        (payload) => {
-          console.log("Realtime Player:", payload);
-          loadPlayers();
-        },
-      )
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "Balance",
-        },
-        (payload) => {
-          console.log("Realtime Balance:", payload);
-          loadPlayers();
-        },
-      )
-      .subscribe((status) => {
-        console.log("Realtime status:", status);
-      });
+    const channel = subscribeToPlayers(() => {
+      loadPlayers();
+    });
 
     return () => {
       supabase.removeChannel(channel);
@@ -100,16 +57,7 @@ export default function CounterMenu() {
       ),
     );
 
-    await fetch("/api/balance", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        playerId: playerId,
-        amount: newBalance,
-      }),
-    });
+    apiUpdateBalance(playerId, newBalance);
   };
 
   const deletePlayer = async (playerId: string) => {
@@ -123,22 +71,15 @@ export default function CounterMenu() {
 
     if (!confirm) return;
 
-    const response = await fetch("/api/player", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        playerId,
-      }),
-    });
+    try {
+      await apiDeletePlayer(playerId);
 
-    if (!response.ok) {
-      console.error("Player delete error");
-      return;
+      setPlayers((players) =>
+        players.filter((player) => player.id !== playerId),
+      );
+    } catch (error) {
+      console.error("player delete error:", error);
     }
-
-    setPlayers((players) => players.filter((player) => player.id !== playerId));
   };
 
   return (
@@ -165,7 +106,7 @@ export default function CounterMenu() {
 
       <CreateCounterButton
         onClick={() => {
-          addNewCounter(name);
+          createPlayer(name);
         }}
       ></CreateCounterButton>
 

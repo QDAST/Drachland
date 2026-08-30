@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "./Button";
-
-type CreateCounterButtonProps = {
-  onClick: (name: string) => void;
-};
+import Button from "../Button";
+import { CreateCounterButtonProps } from "./types";
 
 export default function CreateCounterButton({
   onClick,

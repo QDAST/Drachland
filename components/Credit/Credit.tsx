@@ -1,11 +1,6 @@
 import { ReactNode, useState } from "react";
-import Button from "./Button";
-
-type CreditType = {
-  name?: ReactNode;
-  summ?: number;
-  onDelete?: () => void;
-};
+import Button from "../Button";
+import { CreditType } from "./types";
 
 export default function Credit({
   name = "ANONIM",

@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Button from "@/components/Button";
-import CreditMenu from "@/components/CreditMenu";
+import CreditMenu from "@/components/Credit/CreditMenu";
 import { useState } from "react";
-import CounterMenu from "@/components/CounterMenu";
+import CounterMenu from "@/components/Counter/CounterMenu";
 
 export default function Home() {
   return (

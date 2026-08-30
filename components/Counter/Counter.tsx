@@ -1,16 +1,7 @@
 "use client";
 
-import Button from "./Button";
-import type { ReactNode } from "react";
-
-type CounterProps = {
-  children?: ReactNode;
-  name?: string;
-  step?: number;
-  balance?: number;
-  onChange?: (newBalance: number) => void;
-  onDelete?: () => void;
-};
+import Button from "../Button";
+import { CounterProps } from "./types";
 
 export default function Counter({
   children,
