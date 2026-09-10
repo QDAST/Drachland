@@ -4,7 +4,7 @@ import Button from "../Button";
 
 export default function OrgPanel({ orgs, removeOrg }: OrgPanelType) {
   return (
-    <div className="min-h-150">
+    <div className="">
       <div className="grid grid-cols-2 grid-flow gap-5 px-3">
         {orgs.map((name, index) => (
           <div
