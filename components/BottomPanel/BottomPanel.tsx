@@ -10,8 +10,12 @@ import AppendCardModal from "../AppendCardModal/AppendCardModal";
 import MenuModal from "../MenuModal/MenuModal";
 import ProfitProcessingModal from "../ProfitProcessingModal/ProfitProcessingModal";
 
-export default function BottomPanel({ orgs, trans, addOrg }: BottomPanelType) {
-  const income = orgs.reduce((total, org) => {
+export default function BottomPanel({
+  openedOrgs,
+  trans,
+  addOrg,
+}: BottomPanelType) {
+  const income = openedOrgs.reduce((total, org) => {
     return total + organisations[org].profit;
   }, 0);
 

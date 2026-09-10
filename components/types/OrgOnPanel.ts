@@ -1,8 +1,9 @@
 import { OrganisationName } from "@/public/assets/organisations";
 
-export type OrgPanelType = {
-  orgs: OrganisationName[];
-  removeOrg: (arg0: OrganisationName) => void;
+export type OrgOnPanelType = {
   closeOrg: (arg0: OrganisationName) => void;
   openOrg: (arg0: OrganisationName) => void;
+  removeOrg: (arg0: OrganisationName) => void;
+  index: number;
+  name: OrganisationName;
 };
