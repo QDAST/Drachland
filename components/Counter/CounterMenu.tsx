@@ -2,7 +2,7 @@ import Counter from "@/components/Counter/Counter";
 import CreateCounterButton from "@/components/Counter/CreateCounterButton";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { Player } from "./types";
+import { Player } from "../types/Counter";
 import {
   getPlayers,
   subscribeToPlayers,

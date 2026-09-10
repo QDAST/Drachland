@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Button from "../Button";
-import { CreateCounterButtonProps } from "./types";
+import { CreateCounterButtonProps } from "../types/Counter";
 
 export default function CreateCounterButton({
   onClick,
@@ -10,7 +10,7 @@ export default function CreateCounterButton({
   return (
     <div>
       <Button
-        className="rounded-xl w-full p-2 text-center justify-center text-black font-bold border border-black"
+        className="rounded-xl w-full p-2 text-center justify-center text-black font-bold border border-black bg-amber-400"
         onClick={onClick}
       >
         New Balance

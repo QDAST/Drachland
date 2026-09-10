@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import Button from "../Button";
-import { CreditType } from "./types";
+import { CreditType } from "../types/Credit";
 
 export default function Credit({
   name = "ANONIM",
@@ -27,10 +27,10 @@ export default function Credit({
   return (
     <div className="flex gap-3 items-center bg-gray-500 p-2 rounded-xl border border-black">
       <div className="flex flex-col gap-3">
-        <h1 className="bg-gray-600 w-[30vw] p-2 pl-4 pr-4 rounded-full font-bold">
+        <h1 className="bg-gray-600 w-[20vw] p-2 pl-4 pr-4 rounded-full font-bold text-xs">
           {name}
         </h1>
-        <h1 className="bg-gray-600 w-[30vw] p-2 pl-4 pr-4 rounded-full font-bold">
+        <h1 className="bg-gray-600 w-[20vw] p-2 pl-4 pr-4 rounded-full font-bold">
           {summ}
         </h1>
       </div>

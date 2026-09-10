@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "../Button";
-import { CounterProps } from "./types";
+import { CounterProps } from "../types/Counter";
 
 export default function Counter({
   children,

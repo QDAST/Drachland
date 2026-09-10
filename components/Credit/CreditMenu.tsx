@@ -38,7 +38,7 @@ export default function CreditMenu() {
           className="bg-gray-800 rounded-xl w-full p-2 text-center justify-center text-white font-bold"
         />
         <Button
-          className="rounded-xl w-full h-10 p-2 text-center justify-center text-black font-bold border border-black"
+          className="rounded-xl w-full h-10 p-2 text-center justify-center text-black font-bold border border-black bg-amber-400"
           onClick={addNewCredit}
         >
           New Credit

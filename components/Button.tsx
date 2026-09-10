@@ -14,10 +14,7 @@ export default function Button({
   children,
 }: ButtonProps) {
   return (
-    <button
-      className={`flex bg-amber-400 ${className ?? ""}`}
-      onClick={onClick}
-    >
+    <button className={`flex ${className ?? ""}`} onClick={onClick}>
       {children}
     </button>
   );
