@@ -77,14 +77,14 @@ export const organisations = {
     profit: 15,
     img: ''
   },
-  HarleyDavidsonBicucies: {
-    name: 'Harley-Davidson Bicucies',
+  HarleyDavidson: {
+    name: 'Harley-Davidson',
     price: 12,
     profit: 7,
     img: ''
   },
   Hemres: {
-    name: 'Hemrès Paris',
+    name: 'Hemrès',
     price: 8,
     profit: 4,
     img: ''
@@ -155,8 +155,8 @@ export const organisations = {
     profit: 18,
     img: ''
   },
-  PomorauntPickles: {
-    name: 'Pomoraunt Pickles',
+  Pomoraunt: {
+    name: 'Pomoraunt',
     price: 9,
     profit: 6,
     img: ''
@@ -174,7 +174,7 @@ export const organisations = {
     img: ''
   },
   Starducks: {
-    name: 'Starducks Coffee',
+    name: 'Starducks',
     price: 9,
     profit: 7,
     img: ''
