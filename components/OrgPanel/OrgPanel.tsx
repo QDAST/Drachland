@@ -1,14 +1,14 @@
-import { OrgPanelType } from "../types/OrgPanel";
-import { OrganisationName, organisations } from "@/public/assets/organisations";
-import Button from "../Button";
-import { useState } from "react";
-import OrgOnPanel from "../Org/OrgOnPanel";
+import { OrgPanelType } from '../types/OrgPanel';
+import { OrganisationName, organisations } from '@/public/assets/organisations';
+import Button from '../Button';
+import { useState } from 'react';
+import OrgOnPanel from '../OrgOnPanel/OrgOnPanel';
 
 export default function OrgPanel({
   orgs,
   removeOrg,
   closeOrg,
-  openOrg,
+  openOrg
 }: OrgPanelType) {
   const [isOpened, setIsOpened] = useState(true);
   const onClick = (name: OrganisationName) => {
@@ -20,8 +20,8 @@ export default function OrgPanel({
     setIsOpened(!isOpened);
   };
   return (
-    <div className="">
-      <div className="grid grid-cols-2 grid-flow gap-5 px-3">
+    <div className=''>
+      <div className='grid-flow grid grid-cols-2 gap-5 px-3'>
         {orgs.map((name, index) => (
           <OrgOnPanel
             closeOrg={closeOrg}

@@ -1,206 +1,184 @@
 export const organisations = {
-  Moroboro: {
-    name: "Moroboro",
+  Abibas: {
+    name: 'Abibas',
+    price: 6,
+    profit: 4,
+    img: ''
+  },
+  BencedesMerz: {
+    name: 'Bencedes-Merz',
+    price: 10,
+    profit: 5,
+    img: ''
+  },
+  Boos: {
+    name: 'Boos Gugo Boos',
+    price: 6,
+    profit: 4,
+    img: ''
+  },
+  Camone: {
+    name: 'Camone',
     price: 10,
     profit: 6,
-    img: "",
+    img: ''
   },
-
-  Minisoft: {
-    name: "Minisoft",
-    price: 30,
-    profit: 16,
-    img: "",
+  Dorex: {
+    name: 'Dorex',
+    price: 9,
+    profit: 6,
+    img: ''
   },
-
-  Pineapple: {
-    name: "Pineapple",
-    price: 20,
-    profit: 11,
-    img: "",
+  Exfeed: {
+    name: 'Exfeed',
+    price: 8,
+    profit: 3,
+    img: ''
   },
-
+  Fck: {
+    name: 'Fck',
+    price: 13,
+    profit: 8,
+    img: ''
+  },
   Fuma: {
-    name: "Fuma",
+    name: 'Fuma',
     price: 7,
-    profit: 4,
-    img: "",
+    profit: 5,
+    img: ''
   },
-
-  Abibas: {
-    name: "Abibas",
+  Gamgung: {
+    name: 'Gamgung',
+    price: 12,
+    profit: 6,
+    img: ''
+  },
+  GangstaCola: {
+    name: 'Gangsta Cola',
+    price: 11,
+    profit: 6,
+    img: ''
+  },
+  GevorgioArmyani: {
+    name: 'Gevorgio Armyani',
+    price: 15,
+    profit: 7,
+    img: ''
+  },
+  Googirl: {
+    name: 'Googirl',
+    price: 15,
+    profit: 12,
+    img: ''
+  },
+  Hahazon: {
+    name: 'Hahazon',
+    price: 18,
+    profit: 15,
+    img: ''
+  },
+  HarleyDavidsonBicucies: {
+    name: 'Harley-Davidson Bicucies',
+    price: 12,
+    profit: 7,
+    img: ''
+  },
+  Hemres: {
+    name: 'Hemrès Paris',
+    price: 8,
+    profit: 4,
+    img: ''
+  },
+  Kine: {
+    name: 'Kine',
+    price: 8,
+    profit: 6,
+    img: ''
+  },
+  Leog: {
+    name: 'Leog',
+    price: 14,
+    profit: 7,
+    img: ''
+  },
+  Looking: {
+    name: 'Looking',
+    price: 9,
+    profit: 5,
+    img: ''
+  },
+  Mcronalds: {
+    name: "Mcronald's",
+    price: 16,
+    profit: 7,
+    img: ''
+  },
+  Minisoft: {
+    name: 'Minisoft',
+    price: 30,
+    profit: 20,
+    img: ''
+  },
+  Monstercard: {
+    name: 'Monstercard',
+    price: 3,
+    profit: 3,
+    img: ''
+  },
+  Moroboro: {
+    name: 'Moroboro',
+    price: 4,
+    profit: 1,
+    img: ''
+  },
+  Nefix: {
+    name: 'Nefix',
     price: 15,
     profit: 8,
-    img: "",
+    img: ''
   },
-
-  RedBall: {
-    name: "RedBall",
-    price: 25,
-    profit: 13,
-    img: "",
+  NobertoSavalli: {
+    name: 'Noberto Savalli',
+    price: 8,
+    profit: 5,
+    img: ''
   },
-
-  Starbocks: {
-    name: "Starbocks",
-    price: 35,
+  Nuscafe: {
+    name: 'Nuscafe',
+    price: 17,
+    profit: 9,
+    img: ''
+  },
+  Pineapple: {
+    name: 'Pineapple',
+    price: 27,
     profit: 18,
-    img: "",
+    img: ''
   },
-
-  McRonalds: {
-    name: "McRonalds",
-    price: 40,
-    profit: 21,
-    img: "",
+  PomorauntPickles: {
+    name: 'Pomoraunt Pickles',
+    price: 9,
+    profit: 6,
+    img: ''
   },
-
-  CocaKola: {
-    name: "CocaKola",
-    price: 45,
-    profit: 24,
-    img: "",
+  Roleh: {
+    name: 'Roleh',
+    price: 10,
+    profit: 6,
+    img: ''
   },
-
-  Pepsu: {
-    name: "Pepsu",
-    price: 38,
-    profit: 20,
-    img: "",
+  Sonyaplantation: {
+    name: 'Sonyaplantation',
+    price: 7,
+    profit: 3,
+    img: ''
   },
-
-  Amazin: {
-    name: "Amazin",
-    price: 60,
-    profit: 31,
-    img: "",
-  },
-
-  Netflux: {
-    name: "Netflux",
-    price: 55,
-    profit: 29,
-    img: "",
-  },
-
-  Googol: {
-    name: "Googol",
-    price: 70,
-    profit: 36,
-    img: "",
-  },
-
-  Faceboom: {
-    name: "Faceboom",
-    price: 50,
-    profit: 27,
-    img: "",
-  },
-
-  Instafam: {
-    name: "Instafam",
-    price: 42,
-    profit: 22,
-    img: "",
-  },
-
-  Spotifly: {
-    name: "Spotifly",
-    price: 48,
-    profit: 25,
-    img: "",
-  },
-
-  Samsong: {
-    name: "Samsong",
-    price: 65,
-    profit: 34,
-    img: "",
-  },
-
-  Sonya: {
-    name: "Sonya",
-    price: 58,
-    profit: 30,
-    img: "",
-  },
-
-  Nikey: {
-    name: "Nikey",
-    price: 52,
-    profit: 28,
-    img: "",
-  },
-
-  Adidos: {
-    name: "Adidos",
-    price: 47,
-    profit: 24,
-    img: "",
-  },
-
-  Toyoda: {
-    name: "Toyoda",
-    price: 75,
-    profit: 39,
-    img: "",
-  },
-
-  Teslo: {
-    name: "Teslo",
-    price: 90,
-    profit: 47,
-    img: "",
-  },
-
-  Ferrary: {
-    name: "Ferrary",
-    price: 100,
-    profit: 52,
-    img: "",
-  },
-
-  Lamborgini: {
-    name: "Lamborgini",
-    price: 110,
-    profit: 57,
-    img: "",
-  },
-
-  BurgerQueen: {
-    name: "BurgerQueen",
-    price: 33,
-    profit: 17,
-    img: "",
-  },
-
-  KFCe: {
-    name: "KFCe",
-    price: 28,
-    profit: 15,
-    img: "",
-  },
-
-  Lego: {
-    name: "Lego",
-    price: 36,
-    profit: 19,
-    img: "",
-  },
-
-  PlayStation: {
-    name: "PlayStation",
-    price: 62,
-    profit: 32,
-    img: "",
-  },
-
-  Nintendoo: {
-    name: "Nintendoo",
-    price: 54,
-    profit: 28,
-    img: "",
-  },
+  Starducks: {
+    name: 'Starducks Coffee',
+    price: 9,
+    profit: 7,
+    img: ''
+  }
 };
 
 export type OrganisationName = keyof typeof organisations;

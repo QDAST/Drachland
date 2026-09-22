@@ -1,32 +1,31 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Button from "@/components/Button";
-import CreditMenu from "@/components/Credit/CreditMenu";
-import { useState } from "react";
-import CounterMenu from "@/components/Counter/CounterMenu";
-import Header from "@/components/Header/Header";
-import BottomPanel from "@/components/BottomPanel/BottomPanel";
-import OrgPanel from "@/components/OrgPanel/OrgPanel";
-import { OrganisationName } from "@/public/assets/organisations";
-import { TransportName } from "@/public/assets/transport";
-import BankPanel from "@/components/BankPanel/BankPanel";
-import BankModal from "@/components/BankModal/BankModal";
+import Image from 'next/image';
+import Button from '@/components/Button';
+import CreditMenu from '@/components/Credit/CreditMenu';
+import { useState } from 'react';
+import CounterMenu from '@/components/Counter/CounterMenu';
+import Header from '@/components/Header/Header';
+import BottomPanel from '@/components/BottomPanel/BottomPanel';
+import OrgPanel from '@/components/OrgPanel/OrgPanel';
+import { OrganisationName } from '@/public/assets/organisations';
+import { TransportName } from '@/public/assets/transport';
+import BankPanel from '@/components/BankPanel/BankPanel';
+import BankModal from '@/components/BankModal/BankModal';
 
 export default function Home() {
   const [isBankOpen, setIsBankOpen] = useState(false);
   const [playerOrgs, setPlayerOrgs] = useState<OrganisationName[]>([
-    "Moroboro",
-    "Minisoft",
-    "RedBall",
+    'Moroboro',
+    'Minisoft'
   ]);
   const [openedOrgs, setOpenedOrgs] = useState<OrganisationName[]>(playerOrgs);
   const [playerTrans, setPlayerTrans] = useState<TransportName[]>([
-    "helicopter",
-    "plane",
+    'helicopter',
+    'plane'
   ]);
   const closeOrg = (name: OrganisationName) => {
-    setOpenedOrgs(() => openedOrgs.filter((org) => org !== name));
+    setOpenedOrgs(() => openedOrgs.filter(org => org !== name));
   };
   const openOrg = (name: OrganisationName) => {
     setOpenedOrgs(() => [...openedOrgs, name]);
@@ -36,11 +35,11 @@ export default function Home() {
     openOrg(newOrg);
   };
   const removeOrg = (name: OrganisationName) => {
-    setPlayerOrgs(() => playerOrgs.filter((org) => org !== name));
+    setPlayerOrgs(() => playerOrgs.filter(org => org !== name));
   };
 
   return (
-    <div className="flex flex-col bg-gray-300 min-h-screen h-full w-screen gap-3">
+    <div className='flex h-full min-h-screen w-screen flex-col gap-3 bg-gray-300'>
       <Header></Header>
       <OrgPanel
         orgs={playerOrgs}
