@@ -1,24 +1,24 @@
-import Counter from "@/components/Counter/Counter";
-import CreateCounterButton from "@/components/Counter/CreateCounterButton";
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { Player } from "../types/Counter";
+import Counter from '@/components/Counter/Counter';
+import CreateCounterButton from '@/components/Counter/CreateCounterButton';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { Player } from '../types/Counter';
 import {
   getPlayers,
   subscribeToPlayers,
   deletePlayer as apiDeletePlayer,
   createPlayer as apiCreatePlayer,
-  updateBalance as apiUpdateBalance,
-} from "./api";
+  updateBalance as apiUpdateBalance
+} from './api';
 
 export default function CounterMenu() {
   const [step, setStep] = useState(1);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [players, setPlayers] = useState<Player[]>([]);
 
   const createPlayer = async (name: string) => {
-    const data = await apiCreatePlayer();
-    setPlayers((players) => [...players, data]);
+    const data = await apiCreatePlayer(name);
+    setPlayers(players => [...players, data]);
   };
 
   const loadPlayers = async () => {
@@ -26,7 +26,7 @@ export default function CounterMenu() {
       const data = await getPlayers();
       setPlayers(data);
     } catch (error) {
-      console.error("loadPlayers error:", error);
+      console.error('loadPlayers error:', error);
     }
   };
 
@@ -43,30 +43,30 @@ export default function CounterMenu() {
   }, []);
 
   const updateBalance = async (playerId: string, newBalance: number) => {
-    setPlayers((players) =>
-      players.map((player) =>
+    setPlayers(players =>
+      players.map(player =>
         player.id === playerId
           ? {
               ...player,
               balance: {
                 ...player.balance,
-                amount: newBalance,
-              },
+                amount: newBalance
+              }
             }
-          : player,
-      ),
+          : player
+      )
     );
 
     apiUpdateBalance(playerId, newBalance);
   };
 
   const deletePlayer = async (playerId: string) => {
-    const player = players.find((player) => player.id === playerId);
+    const player = players.find(player => player.id === playerId);
 
     if (!player) return;
 
     const confirm = window.confirm(
-      `Delete player "${player.name}" and his balance?`,
+      `Delete player "${player.name}" and his balance?`
     );
 
     if (!confirm) return;
@@ -74,33 +74,31 @@ export default function CounterMenu() {
     try {
       await apiDeletePlayer(playerId);
 
-      setPlayers((players) =>
-        players.filter((player) => player.id !== playerId),
-      );
+      setPlayers(players => players.filter(player => player.id !== playerId));
     } catch (error) {
-      console.error("player delete error:", error);
+      console.error('player delete error:', error);
     }
   };
 
   return (
-    <div className="flex flex-col bg-gray-400 w-full p-1 gap-3 rounded-xl">
-      <h1 className="flex text-black font-bold justify-center">Balance Menu</h1>
-      <div className="flex gap-3 items-center bg-gray-300 p-1 rounded-2xl border border-black">
-        <h1 className="flex w-3/10 h-10 bg-amber-300 border border-black text-black font-bold justify-center items-center rounded-xl">
+    <div className='flex w-full flex-col gap-3 rounded-xl bg-gray-400 p-1'>
+      <h1 className='flex justify-center font-bold text-black'>Balance Menu</h1>
+      <div className='flex items-center gap-3 rounded-2xl border border-black bg-gray-300 p-1'>
+        <h1 className='flex h-10 w-3/10 items-center justify-center rounded-xl border border-black bg-amber-300 font-bold text-black'>
           STEP
         </h1>
-        <div className="flex  bg-gray-500 h-6 w-0.5 rounded-full"></div>
+        <div className='flex h-6 w-0.5 rounded-full bg-gray-500'></div>
         <input
-          type="text"
-          inputMode="numeric"
+          type='text'
+          inputMode='numeric'
           value={step}
-          onChange={(event) => {
+          onChange={event => {
             const value = event.target.value;
             if (!/^\d*$/.test(value)) return;
             setStep(Number(value) || 0);
           }}
-          placeholder="Step"
-          className="bg-gray-800 rounded-xl border border-black w-full p-2 text-center justify-center text-white font-bold"
+          placeholder='Step'
+          className='w-full justify-center rounded-xl border border-black bg-gray-800 p-2 text-center font-bold text-white'
         />
       </div>
 
@@ -111,22 +109,22 @@ export default function CounterMenu() {
       ></CreateCounterButton>
 
       <input
-        type="text"
+        type='text'
         value={name}
-        onChange={(event) => setName(event.target.value)}
-        placeholder="Player Name"
-        className="bg-gray-800 rounded-xl w-full p-2 text-center justify-center text-white font-bold border border-black"
+        onChange={event => setName(event.target.value)}
+        placeholder='Player Name'
+        className='w-full justify-center rounded-xl border border-black bg-gray-800 p-2 text-center font-bold text-white'
       />
 
-      <div className="flex content-center">
-        <div className="flex flex-col gap-3 w-full">
-          {players.map((player) => (
+      <div className='flex content-center'>
+        <div className='flex w-full flex-col gap-3'>
+          {players.map(player => (
             <Counter
               key={player.id}
               name={player.name}
               balance={player.balance.amount}
               step={step}
-              onChange={(newBalance) => updateBalance(player.id, newBalance)}
+              onChange={newBalance => updateBalance(player.id, newBalance)}
               onDelete={() => deletePlayer(player.id)}
             />
           ))}

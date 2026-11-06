@@ -1,18 +1,18 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
     const players = await prisma.player.findMany({
       include: {
-        balance: true,
-      },
+        balance: true
+      }
     });
 
     return Response.json(players);
   } catch (error) {
-    console.error("GET /api/player error:", error);
+    console.error('GET /api/player error:', error);
 
-    return Response.json({ error: "Failed to load players" }, { status: 500 });
+    return Response.json({ error: 'Failed to load players' }, { status: 500 });
   }
 }
 
@@ -20,27 +20,35 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
+    const isExists = await prisma.player.findFirst({
+      where: {
+        name: body.name
+      }
+    });
+
+    if (isExists) throw new Error('Такой игрок уже есть');
+
     const player = await prisma.player.create({
       data: {
         name: body.name,
         balance: {
           create: {
-            amount: 0,
-          },
-        },
+            amount: 0
+          }
+        }
       },
       include: {
-        balance: true,
-      },
+        balance: true
+      }
     });
 
     return Response.json(player);
   } catch (error) {
-    console.error("POST /api/player error", error);
+    console.error('POST /api/player error', error);
 
     return Response.json(
-      { error: "Failed to create a player" },
-      { status: 500 },
+      { error: 'Failed to create a player' },
+      { status: 500 }
     );
   }
 }
@@ -51,28 +59,28 @@ export async function DELETE(request: Request) {
     const playerId = body.playerId;
 
     if (!playerId) {
-      return Response.json({ error: "playerId is required" }, { status: 400 });
+      return Response.json({ error: 'playerId is required' }, { status: 400 });
     }
 
     await prisma.balance.deleteMany({
       where: {
-        playerId: playerId,
-      },
+        playerId: playerId
+      }
     });
 
     await prisma.player.delete({
       where: {
-        id: playerId,
-      },
+        id: playerId
+      }
     });
 
     return Response.json({ success: true });
   } catch (error) {
-    console.error("DELETE /api/player error:", error);
+    console.error('DELETE /api/player error:', error);
 
     return Response.json(
-      { error: "Failed to delete a player" },
-      { status: 500 },
+      { error: 'Failed to delete a player' },
+      { status: 500 }
     );
   }
 }

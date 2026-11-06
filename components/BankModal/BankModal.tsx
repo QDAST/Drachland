@@ -5,7 +5,7 @@ import { BankModalType } from '../types/BankModal';
 
 export default function BankModal({ onClose }: BankModalType) {
   return (
-    <div className='fixed inset-0 flex bg-black/50 p-5 pb-25'>
+    <div className='fixed inset-0 z-99 flex bg-black/50 p-5 pb-25'>
       <div className='flex h-full w-full flex-col gap-3 rounded-xl bg-white shadow-xl'>
         <Button
           onClick={onClose}

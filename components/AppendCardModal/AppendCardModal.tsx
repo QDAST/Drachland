@@ -70,7 +70,7 @@ export default function AppendCardModal({
             <div
               className={`flex h-16 snap-center items-center justify-center text-xl font-bold ${
                 selectedOrganisation === name
-                  ? 'scale-110 font-bold text-black'
+                  ? 'font-bold text-black'
                   : 'text-gray-500'
               }`}
               key={name}

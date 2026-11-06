@@ -47,10 +47,10 @@ export default function Home() {
         closeOrg={closeOrg}
         openOrg={openOrg}
       ></OrgPanel>
+      <BankPanel onOpen={() => setIsBankOpen(true)}></BankPanel>
       {isBankOpen && (
         <BankModal onClose={() => setIsBankOpen(false)}></BankModal>
       )}
-      <BankPanel onOpen={() => setIsBankOpen(true)}></BankPanel>
       <BottomPanel
         openedOrgs={openedOrgs}
         trans={playerTrans}
