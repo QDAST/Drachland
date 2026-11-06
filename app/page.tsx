@@ -39,7 +39,7 @@ export default function Home() {
   };
 
   return (
-    <div className='flex h-full min-h-screen w-screen flex-col gap-3 bg-gray-300'>
+    <div className='flex min-h-screen w-screen flex-col gap-3 bg-gray-300'>
       <Header></Header>
       <OrgPanel
         orgs={playerOrgs}

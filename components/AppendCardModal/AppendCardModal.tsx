@@ -1,11 +1,11 @@
-import { AppendCardModalType } from "../types/AppendCardModal";
-import Button from "../Button";
-import { OrganisationName, organisations } from "@/public/assets/organisations";
-import { useState, useRef } from "react";
+import { AppendCardModalType } from '../types/AppendCardModal';
+import Button from '../Button';
+import { OrganisationName, organisations } from '@/public/assets/organisations';
+import { useState, useRef } from 'react';
 
 export default function AppendCardModal({
   onClose,
-  addOrg,
+  addOrg
 }: AppendCardModalType) {
   const organisationNames: OrganisationName[] = (
     Object.keys(organisations) as OrganisationName[]
@@ -27,7 +27,7 @@ export default function AppendCardModal({
     let closestItem = items[0];
     let closestDistance = Infinity;
 
-    items.forEach((item) => {
+    items.forEach(item => {
       const rect = item.getBoundingClientRect();
 
       const itemCenter = rect.top + rect.height / 2;
@@ -45,33 +45,33 @@ export default function AppendCardModal({
   };
 
   return (
-    <div className="fixed flex inset-0 bg-black/50 justify-center items-center">
-      <div className="bg-white shadow-xl rounded-xl w-4/5 h-7/10">
-        <div className="flex h-20 justify-between">
-          <div className="w-10"></div>
-          <div className="flex items-center">
-            <h1 className="text-black text-[20px] font-bold">
+    <div className='fixed inset-0 flex items-center justify-center bg-black/50'>
+      <div className='h-7/10 w-4/5 rounded-xl bg-white shadow-xl'>
+        <div className='flex h-20 justify-between'>
+          <div className='w-10'></div>
+          <div className='flex items-center'>
+            <h1 className='text-[20px] font-bold text-black'>
               Choose a company
             </h1>
           </div>
           <Button
             onClick={onClose}
-            className="flex h-10 w-10 text-black bg-red-500 items-center justify-center font-bold text-4xl rounded-tr-xl rounded-bl-xl shadow-xl"
+            className='flex h-10 w-10 items-center justify-center rounded-tr-xl rounded-bl-xl bg-red-500 text-4xl font-bold text-black shadow-xl'
           >
             x
           </Button>
         </div>
         <div
-          className="h-8/10 overflow-y-scroll snap-y snap-mandatory py-45"
+          className='h-8/10 snap-y snap-mandatory overflow-y-scroll py-45'
           ref={pickerRef}
           onScroll={handleScroll}
         >
-          {organisationNames.map((name) => (
+          {organisationNames.map(name => (
             <div
-              className={`h-16 flex items-center justify-center snap-center font-bold text-xl ${
+              className={`flex h-16 snap-center items-center justify-center text-xl font-bold ${
                 selectedOrganisation === name
-                  ? "text-black font-bold scale-110"
-                  : "text-gray-500"
+                  ? 'scale-110 font-bold text-black'
+                  : 'text-gray-500'
               }`}
               key={name}
             >
@@ -79,9 +79,9 @@ export default function AppendCardModal({
             </div>
           ))}
         </div>
-        <div className="flex justify-center">
+        <div className='flex justify-center'>
           <Button
-            className="bg-green-500 p-3 rounded-xl shadow-xl text-xl text-black font-bold"
+            className='rounded-xl bg-green-500 p-3 text-xl font-bold text-black shadow-xl'
             onClick={() => {
               addOrg(selectedOrganisation);
               onClose();
