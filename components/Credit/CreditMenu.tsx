@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Button from '../Button';
 import Credit from './Credit';
+import { CreditMenuType } from '../types/CreditMenu';
 
-export default function CreditMenu() {
-  const [credits, setCredits] = useState<string[]>([]);
+export default function CreditMenu({ credits, setCredits }: CreditMenuType) {
   const [summ, setSumm] = useState(0);
   const [name, setName] = useState('');
 

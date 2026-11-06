@@ -3,7 +3,11 @@ import CreditMenu from '../Credit/CreditMenu';
 import Button from '../Button';
 import { BankModalType } from '../types/BankModal';
 
-export default function BankModal({ onClose }: BankModalType) {
+export default function BankModal({
+  onClose,
+  credits,
+  setCredits
+}: BankModalType) {
   return (
     <div className='fixed inset-0 z-99 flex bg-black/50 p-5 pb-25'>
       <div className='flex h-full w-full flex-col gap-3 rounded-xl bg-white shadow-xl'>
@@ -15,7 +19,10 @@ export default function BankModal({ onClose }: BankModalType) {
         </Button>
         <div className='flex flex-col gap-3 overflow-y-scroll px-5'>
           <CounterMenu></CounterMenu>
-          <CreditMenu></CreditMenu>
+          <CreditMenu
+            credits={credits}
+            setCredits={setCredits}
+          ></CreditMenu>
         </div>
       </div>
     </div>

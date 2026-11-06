@@ -15,6 +15,7 @@ import BankModal from '@/components/BankModal/BankModal';
 
 export default function Home() {
   const [isBankOpen, setIsBankOpen] = useState(false);
+  const [credits, setCredits] = useState<string[]>([]);
   const [playerOrgs, setPlayerOrgs] = useState<OrganisationName[]>([
     'Moroboro',
     'Minisoft'
@@ -49,7 +50,11 @@ export default function Home() {
       ></OrgPanel>
       <BankPanel onOpen={() => setIsBankOpen(true)}></BankPanel>
       {isBankOpen && (
-        <BankModal onClose={() => setIsBankOpen(false)}></BankModal>
+        <BankModal
+          onClose={() => setIsBankOpen(false)}
+          credits={credits}
+          setCredits={setCredits}
+        ></BankModal>
       )}
       <BottomPanel
         openedOrgs={openedOrgs}
