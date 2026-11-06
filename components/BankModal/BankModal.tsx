@@ -17,7 +17,7 @@ export default function BankModal({
         >
           Close Bank
         </Button>
-        <div className='flex flex-col gap-3 overflow-y-scroll px-5'>
+        <div className='flex flex-col gap-3 overflow-y-scroll p-5'>
           <CounterMenu></CounterMenu>
           <CreditMenu
             credits={credits}

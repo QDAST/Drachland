@@ -22,8 +22,8 @@ export default function Home() {
   ]);
   const [openedOrgs, setOpenedOrgs] = useState<OrganisationName[]>(playerOrgs);
   const [playerTrans, setPlayerTrans] = useState<TransportName[]>([
-    'helicopter',
-    'plane'
+    //'helicopter',
+    //'plane'
   ]);
   const closeOrg = (name: OrganisationName) => {
     setOpenedOrgs(() => openedOrgs.filter(org => org !== name));
