@@ -1,5 +1,5 @@
-import { OrganisationName } from "@/public/assets/organisations";
-import { TransportName } from "@/public/assets/transport";
+import { OrganisationName } from '@/public/assets/organisations';
+import { TransportName } from '@/public/assets/transport';
 
 export type BottomPanelType = {
   openedOrgs: OrganisationName[];

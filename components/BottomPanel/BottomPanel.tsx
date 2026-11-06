@@ -1,19 +1,19 @@
-import MenuButton from "../MenuButton/MenuButton";
-import AppendCardButton from "../AppendCardButton/AppendCardButton";
-import ProfitProcessingButton from "../ProfitProcessingButton/ProfitProcessingButton";
-import FinancyDisplay from "../FinancyDisplay/FinancyDisplay";
-import { useEffect, useState } from "react";
-import { BottomPanelType } from "../types/BottomPanel";
-import { organisations } from "@/public/assets/organisations";
-import { transport } from "@/public/assets/transport";
-import AppendCardModal from "../AppendCardModal/AppendCardModal";
-import MenuModal from "../MenuModal/MenuModal";
-import ProfitProcessingModal from "../ProfitProcessingModal/ProfitProcessingModal";
+import MenuButton from '../MenuButton/MenuButton';
+import AppendCardButton from '../AppendCardButton/AppendCardButton';
+import ProfitProcessingButton from '../ProfitProcessingButton/ProfitProcessingButton';
+import FinancyDisplay from '../FinancyDisplay/FinancyDisplay';
+import { useEffect, useState } from 'react';
+import { BottomPanelType } from '../types/BottomPanel';
+import { organisations } from '@/public/assets/organisations';
+import { transport } from '@/public/assets/transport';
+import AppendCardModal from '../AppendCardModal/AppendCardModal';
+import MenuModal from '../MenuModal/MenuModal';
+import ProfitProcessingModal from '../ProfitProcessingModal/ProfitProcessingModal';
 
 export default function BottomPanel({
   openedOrgs,
   trans,
-  addOrg,
+  addOrg
 }: BottomPanelType) {
   const income = openedOrgs.reduce((total, org) => {
     return total + organisations[org].profit;
@@ -28,13 +28,19 @@ export default function BottomPanel({
   const [isProfitModalOpen, setIsProfitModalOpen] = useState(false);
 
   return (
-    <div className="flex fixed bottom-0 w-full h-20 bg-white justify-center items-center px-5 gap-7">
+    <div className='fixed bottom-0 flex h-20 w-full items-center justify-center gap-7 bg-white px-5'>
       <MenuButton onClick={() => setIsMenuModalOpen(true)}></MenuButton>
-      <FinancyDisplay text={`+${income}`} income={true}></FinancyDisplay>
+      <FinancyDisplay
+        text={`+${income}`}
+        income={true}
+      ></FinancyDisplay>
       <ProfitProcessingButton
         onClick={() => setIsProfitModalOpen(true)}
       ></ProfitProcessingButton>
-      <FinancyDisplay text={`-${outcome}`} income={false}></FinancyDisplay>
+      <FinancyDisplay
+        text={`-${outcome}`}
+        income={false}
+      ></FinancyDisplay>
       <AppendCardButton
         onClick={() => setIsCardModalOpen(true)}
       ></AppendCardButton>
