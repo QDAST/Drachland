@@ -21,7 +21,7 @@ export default function OrgOnPanel({
   };
   return (
     <div
-      className={`flex h-20 w-full flex-col items-center justify-between rounded-2xl shadow-xl transition-all duration-200 ${!isOpened ? 'bg-gray-200' : 'bg-white'}`}
+      className={`flex h-20 w-full flex-col items-center justify-between rounded-2xl shadow-xl transition-all duration-200 ${!isOpened ? 'bg-gray-400' : 'bg-white'}`}
     >
       <div className='flex w-full justify-between pl-5'>
         <div>
