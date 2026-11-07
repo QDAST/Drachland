@@ -56,6 +56,7 @@ export default function Home() {
           setCredits={setCredits}
         ></BankModal>
       )}
+      <div className='h-20'></div>
       <BottomPanel
         openedOrgs={openedOrgs}
         trans={playerTrans}
