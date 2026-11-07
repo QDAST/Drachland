@@ -32,10 +32,13 @@ export default function Home() {
     setOpenedOrgs(() => [...openedOrgs, name]);
   };
   const addOrg = (newOrg: OrganisationName) => {
-    setPlayerOrgs(() => [...playerOrgs, newOrg]);
-    openOrg(newOrg);
+    if (!playerOrgs.includes(newOrg)) {
+      setPlayerOrgs(() => [...playerOrgs, newOrg]);
+      openOrg(newOrg);
+    }
   };
   const removeOrg = (name: OrganisationName) => {
+    setOpenedOrgs(() => openedOrgs.filter(org => org !== name));
     setPlayerOrgs(() => playerOrgs.filter(org => org !== name));
   };
 
