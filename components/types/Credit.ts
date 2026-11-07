@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export type CreditType = {
-  name?: ReactNode;
+  name?: string;
   summ?: number;
   onDelete?: () => void;
 };

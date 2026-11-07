@@ -6,7 +6,9 @@ import { BankModalType } from '../types/BankModal';
 export default function BankModal({
   onClose,
   credits,
-  setCredits
+  setCredits,
+  players,
+  setPlayers
 }: BankModalType) {
   return (
     <div className='fixed inset-0 z-99 flex bg-black/50 p-5 pb-25'>
@@ -18,7 +20,10 @@ export default function BankModal({
           Close Bank
         </Button>
         <div className='flex flex-col gap-3 overflow-y-scroll p-5'>
-          <CounterMenu></CounterMenu>
+          <CounterMenu
+            players={players}
+            setPlayers={setPlayers}
+          ></CounterMenu>
           <CreditMenu
             credits={credits}
             setCredits={setCredits}

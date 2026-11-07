@@ -7,8 +7,12 @@ export default function CreditMenu({ credits, setCredits }: CreditMenuType) {
   const [summ, setSumm] = useState(0);
   const [name, setName] = useState('');
 
+  const newCredit = (name: string, summ: number) => {
+    return { name: name, amount: summ, circles: 0 };
+  };
+
   const addNewCredit = () => {
-    setCredits([...credits, name]);
+    setCredits([...credits, newCredit(name, summ)]);
     setName('');
   };
   const deleteCredit = (index: number) => {
@@ -45,10 +49,10 @@ export default function CreditMenu({ credits, setCredits }: CreditMenuType) {
         </Button>
       </div>
       <div className='flex flex-col gap-3'>
-        {credits.map((creditName, index) => (
+        {credits.map((el, index) => (
           <Credit
-            name={creditName}
-            summ={summ}
+            name={el.name}
+            summ={el.amount}
             onDelete={() => deleteCredit(index)}
             key={index}
           ></Credit>

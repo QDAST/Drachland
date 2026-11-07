@@ -3,7 +3,9 @@ import { supabase } from '@/lib/supabase';
 export const getPlayers = async () => {
   const response = await fetch('/api/player');
 
-  if (!response.ok) {
+  if (response.ok) {
+    console.log('Players loaded succesfully');
+  } else {
     throw new Error('getPlayers Error');
   }
 
@@ -29,28 +31,16 @@ export const deletePlayer = async (playerId: string): Promise<void> => {
 
 export function subscribeToPlayers(onChange: () => void) {
   const channel = supabase
-    .channel('players-realtime')
+    .channel(`players-realtime-${crypto.randomUUID()}`)
     .on(
       'postgres_changes',
-      {
-        event: '*',
-        schema: 'public',
-        table: 'Player'
-      },
-      () => {
-        onChange();
-      }
+      { event: '*', schema: 'public', table: 'Player' },
+      () => onChange()
     )
     .on(
       'postgres_changes',
-      {
-        event: '*',
-        schema: 'public',
-        table: 'Balance'
-      },
-      () => {
-        onChange();
-      }
+      { event: '*', schema: 'public', table: 'Balance' },
+      () => onChange()
     )
     .subscribe();
 

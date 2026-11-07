@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import Button from '@/components/Button';
 import CreditMenu from '@/components/Credit/CreditMenu';
-import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { useState, useEffect } from 'react';
 import CounterMenu from '@/components/Counter/CounterMenu';
 import Header from '@/components/Header/Header';
 import BottomPanel from '@/components/BottomPanel/BottomPanel';
@@ -12,10 +13,21 @@ import { OrganisationName } from '@/public/assets/organisations';
 import { TransportName } from '@/public/assets/transport';
 import BankPanel from '@/components/BankPanel/BankPanel';
 import BankModal from '@/components/BankModal/BankModal';
+import { CreditOneType } from '@/components/types/CreditOne';
+import { Player } from '@/components/types/Counter';
+import {
+  getPlayers,
+  subscribeToPlayers,
+  deletePlayer as apiDeletePlayer,
+  createPlayer as apiCreatePlayer,
+  updateBalance as apiUpdateBalance
+} from '../components/Counter/api';
 
 export default function Home() {
+  // [{"name": ""}]
+  const [players, setPlayers] = useState<Player[]>([]);
   const [isBankOpen, setIsBankOpen] = useState(false);
-  const [credits, setCredits] = useState<string[]>([]);
+  const [credits, setCredits] = useState<CreditOneType[]>([]);
   const [playerOrgs, setPlayerOrgs] = useState<OrganisationName[]>([
     'Moroboro',
     'Minisoft'
@@ -42,6 +54,27 @@ export default function Home() {
     setPlayerOrgs(() => playerOrgs.filter(org => org !== name));
   };
 
+  const loadPlayers = async () => {
+    try {
+      const data = await getPlayers();
+      setPlayers(data);
+    } catch (error) {
+      console.error('loadPlayers error:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadPlayers();
+
+    const interval = setInterval(() => {
+      loadPlayers();
+    }, 5000); // 1000 мс = 1 секунда
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <div className='flex min-h-screen w-screen flex-col gap-3 bg-gray-300'>
       <Header></Header>
@@ -57,6 +90,8 @@ export default function Home() {
           onClose={() => setIsBankOpen(false)}
           credits={credits}
           setCredits={setCredits}
+          players={players}
+          setPlayers={setPlayers}
         ></BankModal>
       )}
       <div className='h-20'></div>
